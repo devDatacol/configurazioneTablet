@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurazione Samsung Galaxy Tab</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+        
+        .step-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            animation: slideUp 0.5s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .step-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+        
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 20px;
+            animation: pulse 2s infinite;
+            flex-shrink: 0;
+        }
+        
+        .step-title {
+            font-size: 1.5rem;
+            color: #333;
+            flex: 1;
+        }
+        
+        .screen-mockup {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 10px;
+            margin: 20px auto;
+            width: 300px;
+            height: 450px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            flex-shrink: 0;
+        }
+        
+        .screen {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .screen-header {
+            text-align: left;
+            padding: 10px 5px 20px 5px;
+        }
+
+        .screen-header h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+         .screen-header p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .screen-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .screen-footer {
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mock-button {
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .mock-button.secondary {
+            background-color: lightgray;
+            color: black;
+            font-weight: bold;
+        }
+
+        .mock-list {
+            list-style: none;
+            width: 100%;
+            text-align: left;
+        }
+        .mock-list li {
+            padding: 12px 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+        .mock-list li.active {
+            color: #4285F4;
+            font-weight: bold;
+        }
+
+        .mock-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-color: #f0f2f5;
+        }
+        
+        .mock-radio-group .mock-radio-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            background-color: #fff;
+        }
+        .mock-radio-group .mock-radio-item input {
+            margin-right: 12px;
+        }
+
+
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #667eea;
+            max-width: 450px;
+        }
+        
+        .instructions ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .instructions li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .instructions li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border-left: 4px solid #fdcb6e;
+        }
+        
+        .tip-box strong {
+            color: #d63031;
+        }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+
+        .lista-selezionabile {
+            /* --- Contenitore Principale --- */
+            width: 100%;
+            max-width: 400px;
+            height: 280px;
+            background-color: #f9f9f9; /* Sfondo leggermente off-white */
+            border-radius: 18px; /* Angoli più arrotondati */
+            overflow-y: auto; /* Attiva lo scorrimento verticale */
+            padding: 8px; /* Spazio interno per separare la lista dai bordi */
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); /* Ombra interna per dare profondità */
+            border: 1px solid #eee;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* --- Stile della Lista --- */
+        .lista-selezionabile ul {
+            list-style: none; /* Rimuove i pallini dell'elenco */
+            padding: 0;
+            margin: 0;
+        }
+
+        /* --- Stile di Ogni Elemento della Lista --- */
+        .lista-selezionabile li {
+            padding: 16px 20px; /* Spaziatura interna per renderlo più "ari" */
+            margin: 4px 0; /* Un po' di margine verticale tra gli elementi */
+            border-radius: 12px; /* Angoli arrotondati per ogni elemento */
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease; /* Transizione fluida */
+        }
+
+        /* --- Stile dell'Elemento Attivo/Selezionato --- */
+        .lista-selezionabile li.active {
+            background-color: #007aff; /* Blu acceso, tipico delle UI moderne */
+            color: white; /* Testo bianco per contrasto */
+            font-weight: 600;
+        }
+
+        /* --- Effetto al Passaggio del Mouse (per feedback visivo) --- */
+        .lista-selezionabile li:not(.active):hover {
+            background-color: #e9e9eb;
+        }
+
+        /* --- Stile Personalizzato della Barra di Scorrimento --- */
+        .lista-selezionabile::-webkit-scrollbar {
+            width: 6px;
+        }
+        .lista-selezionabile::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .lista-selezionabile::-webkit-scrollbar-thumb {
+            background-color: #d1d1d6;
+            border-radius: 10px;
+        }
+
+        .trasferimento-dati{
+            flex-direction: column;
+            align-items: normal;
+            padding-top: 0;
+        }
+
+        .trasferimento-bottone{
+            margin-bottom: 5px;
+        }
+
+        /* Aggiungi queste nuove regole */
+        .screen-content {
+            height: 100%; /* Occupa tutta l'altezza del contenitore */
+            display: flex;
+            flex-direction: column; /* Impila gli elementi verticalmente */
+            align-items: center; /* Allinea gli elementi orizzontalmente al centro */
+            justify-content: center; /* Allinea gli elementi verticalmente al centro */
+        }
+
+        /* Assicurati che l'icona e il campo password abbiano una larghezza definita */
+        .wifi-icon {
+            width: 60px;
+            height: 60px;
+            margin: 15px 0; /* Modifica il margine per un migliore spazio */
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .input-field {
+            width: 80%; /* Assicurati che questa classe sia definita */
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .button-mockup {
+            margin-top: 15px; /* Aggiunge spazio sopra il pulsante */
+            cursor: pointer;
+        }
+
+        /* Animazione "float" (se non è già presente nel tuo CSS) */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .security-section{
+            width: 30%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📱 Configurazione Samsung Galaxy Tab</h1>
+            <p>Guida con i passi principali</p>
+        </div>
+
+        <div class="step-container">
+            <div class="step-header">
+                <div class="step-number">0</div>
+                <div class="step-title">Accensione</div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around; gap: 20px;">
+                <div class="screen-mockup">
+                    <div class="screen">
+                        <div class="screen-body" style="justify-content: flex-start; text-align: left; padding-top: 20%;">
+                            <h2 style="font-size: 2.5rem; font-weight: 500;">Benvenuto</h2>
+                        </div>
+                        <div class="screen-footer">
+                            <button class="mock-button">Avanti</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="instructions">
+                    <h3>Istruzioni:</h3>
+                    <ul>
+                        <li>Tieni premuto il pulsante di accensione per avviare il tablet.</li>
+                        <li>Tocca "Avanti" per procedere.</li>
+                    </ul>
+                    <div class="tip-box">
+                        <strong>Suggerimento:</strong> Assicurati che il tablet sia carico almeno al 30% prima di iniziare la configurazione per evitare interruzioni.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <div class="step-title">Selezione Paese e Lingua</div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around; gap: 20px;">
+                <div class="screen-mockup">
+                    <div class="screen">
+                        <div class="screen-body" style="justify-content: flex-start; text-align: left; padding-top: 20%;">
+                            <div class="lista-selezionabile">
+                            <ul>
+                                <li>English (South Africa)</li>
+                                <li >English (United Kingdom)</li>
+                                <li>English (United States)</li>
+                                <li class="active">Italiano</li>
+                                <li>Español (España)</li>
+                                <li>Español (Estados Unidos)</li>
+                                <li>Euskara</li>
+                                <li>Filipino</li>
+                                <li>Deutsch</li>
+                            </ul>
+                            </div>
+                        </div>
+                        <div class="screen-footer">
+                            <button class="mock-button">Avanti</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="instructions">
+                    <h3>Istruzioni:</h3>
+                    <ul>
+                        <li>Seleziona la voce "Italiano" o la voce desiderata.</li>
+                        <li>Tocca "Avanti" per procedere.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <div class="step-title">Trasferimento Dati</div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around; gap: 20px;">
+                <div class="screen-mockup">
+                    <div class="screen">
+                        <div class="screen-header">
+                            <h2>Configurazione semplice con altro dispositivo</h2>
+                        </div>
+                        <div class="screen-body" style="gap: 20px;">
+                            <svg width="96" height="96" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Border -->
+                                <rect x="2" y="2" width="20" height="20" rx="1" stroke="currentColor" stroke-width="0.5" fill="white"/>
+                                
+                                <!-- Corner position markers (top-left) -->
+                                <rect x="3" y="3" width="6" height="6" fill="currentColor"/>
+                                <rect x="4" y="4" width="4" height="4" fill="white"/>
+                                <rect x="5" y="5" width="2" height="2" fill="currentColor"/>
+                                
+                                <!-- Corner position markers (top-right) -->
+                                <rect x="15" y="3" width="6" height="6" fill="currentColor"/>
+                                <rect x="16" y="4" width="4" height="4" fill="white"/>
+                                <rect x="17" y="5" width="2" height="2" fill="currentColor"/>
+                                
+                                <!-- Corner position markers (bottom-left) -->
+                                <rect x="3" y="15" width="6" height="6" fill="currentColor"/>
+                                <rect x="4" y="16" width="4" height="4" fill="white"/>
+                                <rect x="5" y="17" width="2" height="2" fill="currentColor"/>
+                                
+                                <!-- Random data pattern -->
+                                <rect x="11" y="3" width="1" height="1" fill="currentColor"/>
+                                <rect x="13" y="3" width="1" height="1" fill="currentColor"/>
+                                <rect x="11" y="4" width="1" height="1" fill="currentColor"/>
+                                <rect x="12" y="5" width="1" height="1" fill="currentColor"/>
+                                <rect x="13" y="5" width="1" height="1" fill="currentColor"/>
+                                
+                                <rect x="3" y="11" width="1" height="1" fill="currentColor"/>
+                                <rect x="5" y="11" width="1" height="1" fill="currentColor"/>
+                                <rect x="7" y="11" width="1" height="1" fill="currentColor"/>
+                                <rect x="4" y="12" width="1" height="1" fill="currentColor"/>
+                                <rect x="6" y="12" width="1" height="1" fill="currentColor"/>
+                                <rect x="8" y="12" width="1" height="1" fill="currentColor"/>
+                                
+                                <rect x="11" y="11" width="1" height="1" fill="currentColor"/>
+                                <rect x="13" y="11" width="1" height="1" fill="currentColor"/>
+                                <rect x="15" y="11" width="1" height="1" fill="currentColor"/>
+                                <rect x="17" y="11" width="1" height="1" fill="currentColor"/>
+                                <rect x="19" y="11" width="1" height="1" fill="currentColor"/>
+                                <rect x="12" y="12" width="1" height="1" fill="currentColor"/>
+                                <rect x="14" y="12" width="1" height="1" fill="currentColor"/>
+                                <rect x="16" y="12" width="1" height="1" fill="currentColor"/>
+                                <rect x="18" y="12" width="1" height="1" fill="currentColor"/>
+                                
+                                <rect x="11" y="15" width="1" height="1" fill="currentColor"/>
+                                <rect x="12" y="16" width="1" height="1" fill="currentColor"/>
+                                <rect x="13" y="17" width="1" height="1" fill="currentColor"/>
+                                <rect x="15" y="15" width="1" height="1" fill="currentColor"/>
+                                <rect x="17" y="16" width="1" height="1" fill="currentColor"/>
+                                <rect x="19" y="17" width="1" height="1" fill="currentColor"/>
+                                <rect x="16" y="18" width="1" height="1" fill="currentColor"/>
+                                <rect x="18" y="18" width="1" height="1" fill="currentColor"/>
+                                <rect x="15" y="19" width="1" height="1" fill="currentColor"/>
+                                <rect x="17" y="19" width="1" height="1" fill="currentColor"/>
+                                <rect x="19" y="19" width="1" height="1" fill="currentColor"/>
+                                
+                                <!-- Timing patterns -->
+                                <rect x="10" y="7" width="1" height="1" fill="currentColor"/>
+                                <rect x="12" y="7" width="1" height="1" fill="currentColor"/>
+                                <rect x="14" y="7" width="1" height="1" fill="currentColor"/>
+                                <rect x="7" y="10" width="1" height="1" fill="currentColor"/>
+                                <rect x="7" y="12" width="1" height="1" fill="currentColor"/>
+                                <rect x="7" y="14" width="1" height="1" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="screen-footer trasferimento-dati">
+                            <button class="mock-button trasferimento-bottone" style="width: auto;">Galaxy o Android</button>
+                            <button class="mock-button trasferimento-bottone" style="width: auto; padding: 12px 30px;">Iphone e Ipad</button>
+                            <button class="mock-button trasferimento-bottone" style="width: auto; padding: 12px 30px;">Configura manualmente</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="instructions">
+                    <h3>Istruzioni:</h3>
+                    <ul>
+                        <li>Il tablet ti chiederà se vuoi copiare app e dati da un altro dispositivo.</li>
+                        <li>Se hai un dispositivo compatibile con questa modalità, puoi usare questa funzione per velocizzare la configurazione.</li>
+                    </ul>
+                    <div class="tip-box">
+                        <strong>Nota:</strong> L'opzione "Configura manualmente" è la scelta migliore per un dispositivo aziendale per evitare di trasferire dati personali non necessari.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <div class="step-title">Connessione Wi-Fi</div>
+            </div>
+            
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around;">
+                <div class="screen-mockup">
+                    <div class="screen">
+                        <div class="screen-content">
+                            <svg class="wifi-icon" viewBox="0 0 24 24" fill="#667eea">
+                                <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/>
+                            </svg>
+                             <div class="screen-body" style="justify-content: flex-start; text-align: left;">
+                                <div class="lista-selezionabile">
+                                <ul>
+                                    <li>Rete Wi-Fi Aziendale 1</li>
+                                    <li class="active">Rete Wi-Fi Personale Hotspot</li>
+                                    <li>Rete Wi-Fi Aziendale 2</li>
+                                    <li>Rete Wi-Fi Aziendale 3</li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="instructions">
+                    <h3>Istruzioni:</h3>
+                    <ul>
+                        <li>Seleziona la tua rete Wi-Fi dall'elenco</li>
+                        <li>Inserisci la password della rete</li>
+                        <li>Tocca "Connetti" per stabilire la connessione</li>
+                        <li>Attendi la conferma della connessione</li>
+                    </ul>
+                    <div class="tip-box">
+                        <strong>Nota:</strong> Per la prima configurazione utilizza il tuo telefono come hotspot per ottenere una connessione internet. Una volta completata la prima configurazione, ci connetteremo alla rete aziendale.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-header">
+                <div class="step-number">4</div>
+                <div class="step-title">Copia App e Dati</div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around; gap: 20px;">
+                <div class="screen-mockup">
+                    <div class="screen">
+                        <div class="screen-body" style="gap: 20px;">
+                             <svg width="240" height="240" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Background documents -->
+                                <rect x="4" y="4" width="12" height="14" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <rect x="8" y="6" width="12" height="14" rx="2" stroke="currentColor" stroke-width="1.5" fill="white"/>
+                                
+                                <!-- Data rows in the front document -->
+                                <line x1="10" y1="9" x2="18" y2="9" stroke="currentColor" stroke-width="1" opacity="0.7"/>
+                                <line x1="10" y1="11" x2="16" y2="11" stroke="currentColor" stroke-width="1" opacity="0.7"/>
+                                <line x1="10" y1="13" x2="18" y2="13" stroke="currentColor" stroke-width="1" opacity="0.7"/>
+                                <line x1="10" y1="15" x2="15" y2="15" stroke="currentColor" stroke-width="1" opacity="0.7"/>
+                                
+                                <!-- Copy indicator arrows -->
+                                <path d="M6.5 10L7.5 9L6.5 8" stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="screen-footer">
+                            <button class="mock-button secondary" style="width: auto;">Non copiare</button>
+                            <button class="mock-button" style="width: auto; padding: 12px 30px;">Avanti</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="instructions">
+                    <h3>Istruzioni:</h3>
+                    <ul>
+                        <li>Procedendo con la configurazione manuale, selezionare il pulsante "Non copiare" per non importare dati e app.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-header">
+                <div class="step-number">5</div>
+                <div class="step-title">Account Google</div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around; gap: 20px;">
+                <div class="screen-mockup">
+                    <div class="screen">
+                        <div class="screen-header" style="text-align: center;">
+                            <h2 style="font-weight: bold; font-size: 2rem;">G<span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span>g<span style="color:#4285F4">l</span><span style="color:#34A853">e</span></h2>
+                            <h3>Accedi</h3>
+                        </div>
+                        <div class="screen-body" style="justify-content: flex-start; padding-top: 10px;">
+                            <input type="email" placeholder="Email o numero di telefono" class="mock-input">
+                             <!-- input type="password" placeholder="Password" class="mock-input"> -->
+                        </div>
+                        <div class="screen-footer">
+                            <button class="mock-button secondary" style="width: auto;">Crea account</button>
+                            <button class="mock-button" style="width: auto; padding: 12px 30px;">Avanti</button>
+                        </div>
+                        <button class="mock-button secondary" style="width: auto;margin-top: 5px;">Salta</button>
+                    </div>
+                </div>
+                <div class="instructions">
+                    <h3>Istruzioni:</h3>
+                    <ul>
+                        <li>Inserisci l'indirizzo email Google personale.</li>
+                    </ul>
+                    <div class="tip-box">
+                        <strong>Nota:</strong> La configurazione di un account Google torna utile per il successivo download di applicazioni dal Google Play Store
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-header">
+                <div class="step-number">6</div>
+                <div class="step-title">Sicurezza e Privacy</div>
+            </div>
+            
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around;">
+                <div class="screen-mockup">
+                    <div class="screen">
+                        <div class="screen-content">
+                            <h2 style="color: #333; margin-bottom: 20px;">Imposta Sicurezza</h2>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0;">
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: #f0f0f0;"></div>
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: #667eea;"></div>
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: #f0f0f0;"></div>
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: #667eea;"></div>
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: #667eea;"></div>
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: #f0f0f0;"></div>
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: #f0f0f0;"></div>
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: #667eea;"></div>
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: #f0f0f0;"></div>
+                            </div>
+                            <p style="color: #666; margin: 15px 0;">PIN / Password / Segno</p>
+                            <div class="mock-button secondary security-section">Salta</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="instructions">
+                    <h3>Istruzioni:</h3>
+                    <ul>
+                        <li>Scegli un metodo di sblocco schermo (PIN, Password o Segno)</li>
+                    </ul>
+                    <div class="tip-box">
+                        <strong>Nota:</strong> Si consiglia di saltare questa procedura utilizzando il tasto "Salta"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-header">
+                <div class="step-number">7</div>
+                <div class="step-title">Scelta del Browser Web</div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around; gap: 20px;">
+                <div class="screen-mockup">
+                    <div class="screen">
+                        <div class="screen-header">
+                            <h2>Scegli il Browser</h2>
+                        </div>
+                        <div class="screen-body" style="justify-content: flex-start; width: 100%;">
+                            <div class="mock-radio-group">
+                                <label style="font-weight: bold; margin-bottom: 5px; display: block; text-align: left;">Browser:</label>
+                                <div class="mock-radio-item">
+                                    <input type="radio" name="browser" checked> <span>Google Chrome</span>
+                                </div>
+                                 <div class="mock-radio-item">
+                                    <input type="radio" name="browser"> <span>Samsung Internet</span>
+                                </div>
+                                <div class="mock-radio-item">
+                                    <input type="radio" name="browser"> <span>Firefox</span>
+                                </div>
+                                <div class="mock-radio-item">
+                                    <input type="radio" name="browser"> <span>Microsoft Edge</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screen-footer">
+                            <button class="mock-button">Imposta come predefinito</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="instructions">
+                    <h3>Istruzioni</h3>
+                    <ul>
+                        <li>Il sistema operativo richiederà di scegliere un browser predefinito. Seleziona <strong>Google Chrome</strong>.</li>
+                        <li>Tocca "Imposta come predefinito" per confermare.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-header">
+                <div class="step-number">8</div>
+                <div class="step-title">Scelta del Motore di Ricerca</div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around; gap: 20px;">
+                <div class="screen-mockup">
+                    <div class="screen">
+                        <div class="screen-header">
+                            <h2>Scegli il motore di ricerca</h2>
+                        </div>
+                        <div class="screen-body" style="justify-content: flex-start; width: 100%;">
+                            <div class="mock-radio-group">
+                                <label style="font-weight: bold; margin: 15px 0 5px 0; display: block; text-align: left;">Motore di ricerca:</label>
+                                <div class="mock-radio-item">
+                                    <input type="radio" name="search" checked> <span>Google</span>
+                                </div>
+                                 <div class="mock-radio-item">
+                                    <input type="radio" name="search"> <span>Microsoft Bing</span>
+                                </div>
+                                <div class="mock-radio-item">
+                                    <input type="radio" name="search"> <span>DuckDuckGo</span>
+                                </div>
+                                <div class="mock-radio-item">
+                                    <input type="radio" name="search"> <span>Yahoo</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="screen-footer">
+                            <button class="mock-button">Imposta come predefinito</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="instructions">
+                    <h3>Istruzioni</h3>
+                    <ul>
+                        <li>Il sistema operativo richiederà di scegliere un motore di ricerca predefinito. Seleziona <strong>Google</strong>.</li>
+                        <li>Tocca "Imposta come predefinito" per confermare.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-header">
+                <div class="step-number">9</div>
+                <div class="step-title">Account Samsung</div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around; gap: 20px;">
+                 <div class="screen-mockup">
+                    <div class="screen">
+                        <div class="screen-header">
+                            <h2>Samsung Account</h2>
+                        </div>
+                        <div class="screen-body">
+                             <p style="margin-bottom: 20px;">Accedi per usare i servizi Samsung.</p>
+                             <input type="email" placeholder="Email o numero di telefono" class="mock-input">
+                        </div>
+                        <div class="screen-footer">
+                            <button class="mock-button secondary" style="width: auto;">Password Dimenticata o account non disponibile?</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="instructions">
+                    <h3>Istruzioni:</h3>
+                    <ul>
+                        <li>L'account Samsung non è necessario per l'uso aziendale.</li>
+                        <li>Seleziona <strong>Password Dimenticata o account non disponibile?</strong> presente in basso per ignorare questo passaggio.</li>
+                        <li>Conferma la scelta se richiesto.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-header">
+                <div class="step-number">10</div>
+                <div class="step-title">Account Samsung</div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around; gap: 20px;">
+                 <div class="screen-mockup">
+                    <div class="screen">
+                        <div class="screen-header">
+                            <h2>Samsung Account</h2>
+                        </div>
+                        <div class="screen-content">
+                            <div class="screen-footer">
+                                <button class="mock-button secondary" style="width: auto;">Crea account</button>
+                            </div>
+                            <div class="screen-footer">
+                                <button class="mock-button secondary" style="width: auto;">ID dimenticato</button>
+                            </div>
+                            <div class="screen-footer">
+                                <button class="mock-button secondary" style="width: auto;">Password dimenticata</button>
+                            </div>
+                            <div class="screen-footer">
+                                <button class="mock-button secondary" style="width: auto;">Configura poi in Impostaz.</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="instructions">
+                    <h3>Istruzioni:</h3>
+                    <ul>
+                        <li>Seleziona <strong>Configura poi in Impostaz.</strong> presente in basso per ignorare questo passaggio.</li>
+                        <li>Conferma la scelta se richiesto.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-container">
+            <div class="step-header">
+                <div class="step-number">11</div>
+                <div class="step-title">Account Samsung</div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around; gap: 20px;">
+                 <div class="screen-mockup">
+                    <div class="screen">
+                        <div class="screen-header">
+                            <h2>Samsung Account</h2>
+                        </div>
+                        <div class="screen-content">
+                            <svg width="240" height="240" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Document background -->
+                            <rect x="3" y="2" width="18" height="20" rx="2" stroke="currentColor" stroke-width="1.5" fill="white"/>
+                            
+                            <!-- Paper fold corner -->
+                            <path d="M17 2 L21 2 L21 6 L17 2 Z" fill="white" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                            
+                            <!-- Header line (title area) -->
+                            <rect x="5" y="5" width="10" height="1.5" rx="0.75" fill="currentColor" opacity="0.8"/>
+                            
+                            <!-- Form fields with labels and input areas -->
+                            <!-- Field 1 -->
+                            <rect x="5" y="9" width="4" height="1" rx="0.5" fill="currentColor" opacity="0.6"/>
+                            <rect x="5" y="10.5" width="12" height="1.5" rx="0.75" stroke="currentColor" stroke-width="0.5" fill="none"/>
+                            
+                            <!-- Field 2 -->
+                            <rect x="5" y="13.5" width="3" height="1" rx="0.5" fill="currentColor" opacity="0.6"/>
+                            <rect x="5" y="15" width="8" height="1.5" rx="0.75" stroke="currentColor" stroke-width="0.5" fill="none"/>
+                            
+                            <!-- Field 3 -->
+                            <rect x="5" y="17.5" width="5" height="1" rx="0.5" fill="currentColor" opacity="0.6"/>
+                            <rect x="5" y="19" width="14" height="1.5" rx="0.75" stroke="currentColor" stroke-width="0.5" fill="none"/>
+                            
+                            <!-- Small bullet points/checkboxes -->
+                            <circle cx="19" cy="10.25" r="0.75" stroke="currentColor" stroke-width="0.5" fill="none"/>
+                            <circle cx="19" cy="15.75" r="0.75" stroke="currentColor" stroke-width="0.5" fill="none"/>
+                            <circle cx="15" cy="19.75" r="0.75" stroke="currentColor" stroke-width="0.5" fill="none"/>
+                            
+
+                            </svg>
+                            <div class="screen-footer">
+                                <button class="mock-button secondary" style="width: auto;margin-right:5px">Ignora</button>
+                                <button class="mock-button" style="width: auto;">Accedi</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="instructions">
+                    <h3>Istruzioni:</h3>
+                    <ul>
+                        <li>Seleziona <strong>Ignora</strong> per ignorare questo passaggio.</li>
+                        <li>Conferma la scelta se richiesto.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="step-container">
+            <div class="step-header">
+                <div class="step-number">12</div>
+                <div class="step-title">Completamento Configurazione</div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-around; gap: 20px;">
+                <div class="screen-mockup">
+                    <div class="screen">
+                         <div class="screen-body">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background-color: #34A853; color: white; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin-bottom: 20px;">
+                                ✓
+                            </div>
+                            <h2 style="font-size: 1.5rem;">È tutto pronto</h2>
+                            <p style="color: #666; margin-top: 10px;">Tocca "Fine" per iniziare a usare il tuo tablet.</p>
+                         </div>
+                         <div class="screen-footer">
+                             <button class="mock-button">Fine</button>
+                         </div>
+                    </div>
+                </div>
+                <div class="instructions">
+                    <h3>Istruzioni:</h3>
+                    <ul>
+                        <li>Rivedi le ultime impostazioni e tocca "Fine".</li>
+                        <li>Il tablet si avvierà sulla schermata Home.</li>
+                    </ul>
+                    <div class="tip-box">
+                        <strong>Suggerimenti Post-Configurazione:</strong>
+                        <br>• Verifica che l'opzione <strong>Blocco Automatico</strong> presente in <strong>Impostazioni -> Sicurezza e Privacy</strong> sia disabilitato.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
